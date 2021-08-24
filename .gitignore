@@ -1,0 +1,5 @@
+.idea
+port-scanner-go*
+!port-scanner-go.go
+test*
+archives
