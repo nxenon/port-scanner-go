@@ -148,6 +148,17 @@ func scanPort(
 	d := net.Dialer{Timeout: timeoutTCP}
 	_, err := d.Dial("tcp", targetIP + ":" + port)
 	if err != nil {
+		if add_err, ok := err.(*net.AddrError); ok {
+			if add_err.Timeout(){
+				return
+
+			}
+		} else{
+			println(err.Error())
+			os.Exit(1)
+
+		}
+
 		return
 
 	}
