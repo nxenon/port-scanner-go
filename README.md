@@ -1,6 +1,6 @@
 # Port-Scanner-GO
 [![Tool Category](https://badgen.net/badge/Tool/Port%20Scanner/black)](https://github.com/nxenon/port-scanner-go)
-[![APP Version](https://badgen.net/badge/Version/v1.0/red)](https://github.com/nxenon/port-scanner-go)
+[![APP Version](https://badgen.net/badge/Version/v1.1/red)](https://github.com/nxenon/port-scanner-go)
 [![Go Version](https://badgen.net/badge/Go/1.13/blue)](https://golang.org/doc/go1.13)
 [![License](https://badgen.net/badge/License/GPLv2/purple)](https://github.com/nxenon/port-scanner-go/blob/master/LICENSE)
 
