@@ -39,6 +39,20 @@ func parseArgs(){
 
 	parser.Parse(os.Args)
 
+	if *ip_arg == ""{
+		println("Enter Target IP")
+		println(os.Args[0] + " -h for Help")
+		os.Exit(0)
+
+	}
+
+	if *ports_arg == ""{
+		println("Enter Port")
+		println(os.Args[0] + " -h for Help")
+		os.Exit(0)
+
+	}
+
 	targetIP = *ip_arg
 
 	timeoutTCP = time.Duration(*timeout) * time.Millisecond
@@ -58,6 +72,16 @@ func getPortsList(
 	// if port argument is like : 22,80,23
 	if strings.Contains(port_var, ","){
 		ports_list := strings.Split(port_var, ",")
+
+		for p:= range ports_list{
+			_, err_c := strconv.Atoi(ports_list[p])
+			if err_c != nil{
+				fmt.Printf("Invalid Port : %s\n", ports_list[p])
+				os.Exit(0)
+
+			}
+		}
+
 		return ports_list
 
 	} else if strings.Contains(port_var, "-"){
