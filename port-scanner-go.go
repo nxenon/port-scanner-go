@@ -144,7 +144,6 @@ func scanPort(
 	port string,
 	){
 
-
 	d := net.Dialer{Timeout: timeoutTCP}
 	_, err := d.Dial("tcp", targetIP + ":" + port)
 	if err != nil {
@@ -153,6 +152,27 @@ func scanPort(
 				return
 
 			}
+		} else if add_err, ok := err.(*net.OpError); ok {
+
+			// handle lacked sufficient buffer space error
+
+			if strings.TrimSpace(add_err.Err.Error()) == "bind: An operation on a socket could not be performed because " +
+				"the system lacked sufficient buffer space or because a queue was full." {
+
+				time.Sleep(timeoutTCP + (3000 * time.Millisecond))
+
+				_, err_ae := d.Dial("tcp", targetIP + ":" + port)
+
+				if err_ae != nil {
+					if add_err, ok := err.(*net.AddrError); ok {
+						if add_err.Timeout() {
+							return
+
+						}
+					}
+				}
+			}
+
 		} else{
 			println(err.Error())
 			os.Exit(1)
